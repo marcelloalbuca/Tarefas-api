@@ -13,16 +13,11 @@ public class Tarefa {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    
     @Column(name="nome")
     private String nome;
 
     @Column(name="descricao")
     private String descricao;
-
-    
-    @Column(name="concluido")
-    private Boolean concluido;
 
     @Override
     public int hashCode(){
@@ -39,12 +34,13 @@ public class Tarefa {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        final Tarefa other = (Tarefa) obj;
+        Tarefa other = (Tarefa) obj;
         if (id == null) {
             if (other.id != null)
                 return false;
-        } else if (!id.equals(other.id))
-            return false;
+        } 
+        else if (!id.equals(other.id))
+        return false;
         return true;
     }
 
@@ -56,27 +52,19 @@ public class Tarefa {
         return descricao;
     }
 
-    public void setDescricao(final String descricao) {
+    public void setDescricao(String descricao) {
         this.descricao = descricao;
-    }
-
-    public boolean getConcluido() {
-        return concluido;
-    }
-
-    public void setConcluido(final Boolean concluido) {
-        this.concluido = concluido;
     }
 
     public String getNome() {
         return nome;
     }
 
-    public void setNome(final String nome) {
+    public void setNome(String nome) {
         this.nome = nome;
     }
 
-    public void setId(final Long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }

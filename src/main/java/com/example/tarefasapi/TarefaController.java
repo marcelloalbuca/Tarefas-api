@@ -9,6 +9,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -51,7 +52,7 @@ public class TarefaController {
 
         if(tarefaExistente.isPresent()){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-            "já Existe uma Oportunidade com a mesma descrição");
+            "já Existe uma Tarefa com a mesma descrição");
         }
         return tarefas.save(tarefa);
     }
@@ -71,7 +72,8 @@ public class TarefaController {
                                       @RequestBody Tarefa tarefa) {
    return tarefas.findById(id)
            .map(record -> {
-               record.setConcluido(tarefa.getConcluido());
+               record.setNome(tarefa.getNome());
+               record.setDescricao(tarefa.getDescricao());
                Tarefa updated = tarefas.save(record);
                return ResponseEntity.ok().body(updated);
            }).orElse(ResponseEntity.notFound().build());
